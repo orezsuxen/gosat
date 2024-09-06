@@ -2,6 +2,7 @@ package main
 
 import (
 	"local/gosat/insignals"
+	"local/gosat/visual"
 
 	"github.com/veandco/go-sdl2/sdl"
 )
@@ -21,11 +22,19 @@ func main() {
 	defer window.Destroy()
 
 	// implement of rederer flags like render to texture
-	rend, err := sdl.CreateRenderer(window, -1, 2)
+	// flags:
+	// software rendere = 0x1
+	// acceleratet renderer = 0x2
+	// Present() with VSync = 0x4
+	// Enable Render to Texture = 0x8
+	rend, err := sdl.CreateRenderer(window, -1, 0xA) // acceleratet and texture
 	if err != nil {
 		panic(err)
 	}
 	defer rend.Destroy()
+
+	texter := visual.NewTextDrawer(rend)
+	texter.Init()
 
 	rect := sdl.Rect{X: 0, Y: 0, W: 200, H: 200}
 
