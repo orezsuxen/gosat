@@ -2,6 +2,7 @@ package main
 
 import (
 	"local/gosat/insignals"
+	"local/gosat/vector"
 	"local/gosat/visual"
 
 	"github.com/veandco/go-sdl2/sdl"
@@ -34,7 +35,13 @@ func main() {
 	defer rend.Destroy()
 
 	texter := visual.NewTextDrawer(rend)
-	texter.Init()
+
+	label := visual.TextLabel{
+		Text:     "Hello Text !\nline number 2",
+		Position: vector.Vector{X: 200, Y: 200},
+		Scale:    vector.Vector{X: 2, Y: 4},
+		Spacing:  vector.Vector{X: 0, Y: 0},
+	}
 
 	rect := sdl.Rect{X: 0, Y: 0, W: 200, H: 200}
 
@@ -44,6 +51,7 @@ func main() {
 		rend.Clear()
 		rend.SetDrawColor(255, 0, 255, 255)
 		rend.FillRect(&rect)
+		texter.Draw(&label)
 
 		rend.Present()
 	}
