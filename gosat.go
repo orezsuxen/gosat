@@ -37,9 +37,9 @@ func main() {
 	texter := visual.NewTextDrawer(rend)
 
 	label := visual.TextLabel{
-		Text:     "Hello Text !\nline number 2",
+		Text:     "Hello Text !\nline number 2\n199 (helÄlo)< !=",
 		Position: vector.Vector{X: 200, Y: 200},
-		Scale:    vector.Vector{X: 2, Y: 4},
+		Scale:    vector.Vector{X: 2, Y: 2},
 		Spacing:  vector.Vector{X: 0, Y: 0},
 	}
 
@@ -54,5 +54,6 @@ func main() {
 		texter.Draw(&label)
 
 		rend.Present()
+		sdl.Delay(20)
 	}
 }

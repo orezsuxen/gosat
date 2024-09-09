@@ -43,8 +43,17 @@ func (t *TextDrawer) Draw(text *TextLabel) {
 				}
 				t.rend.Copy(t.texture, &src, &dst)
 				localPos.X += (text.Scale.X * 8) + (text.Spacing.X * text.Scale.X)
+			} else { // fallback if char connot be found in symbols
+				src := sdl.Rect{X: int32(t.symbolPosition[math.MaxInt32]), Y: 0, W: 8, H: 8}
+				dst := sdl.Rect{
+					X: int32(localPos.X),
+					Y: int32(localPos.Y),
+					W: int32(8 * text.Scale.X),
+					H: int32(8 * text.Scale.Y),
+				}
+				t.rend.Copy(t.texture, &src, &dst)
+				localPos.X += (text.Scale.X * 8) + (text.Spacing.X * text.Scale.X)
 			}
-
 		}
 	}
 }
@@ -65,7 +74,7 @@ func (t *TextDrawer) Init() (ok bool) {
 	}
 	t.texture = tmp
 	t.texture.SetBlendMode(sdl.BLENDMODE_BLEND)
-	//TODO: render symbols to texture
+
 	t.rend.SetRenderTarget(t.texture)
 	t.rend.SetDrawColor(0, 0, 0, 0)
 	t.rend.Clear()
@@ -102,6 +111,8 @@ func NewTextDrawer(r *sdl.Renderer) TextDrawer {
 
 func fontMap() map[rune]uint64 {
 	return map[rune]uint64{
+		math.MaxInt32: 0x0FF00FF00FF00FF0, //fallback char
+
 		'A': 0x006666667E663C18,
 		'B': 0x003E66663E66663E,
 		'C': 0x003C66060606663C,
@@ -185,9 +196,9 @@ func fontMap() map[rune]uint64 {
 
 		':': 0x0000180000180000,
 		';': 0x0C18180000180000,
-		'<': 0x0070180C060C1870,
+		'<': 0x0000180C060C1800, //'<': 0x0070180C060C1870,
 		'=': 0x0000007E007E0000,
-		'>': 0x000E18306030180E,
+		'>': 0x0000183060301800, //'>': 0x000E18306030180E,
 		'?': 0x001800183060663C,
 		'@': 0x003C46067676663C,
 
