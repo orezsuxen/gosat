@@ -37,7 +37,7 @@ func main() {
 	texter := visual.NewTextDrawer(rend)
 
 	label := visual.TextLabel{
-		Text:     "Hello Text !\nline number 2\n199 (helÄlo)< !=",
+		Text:     "Test text",
 		Position: vector.Vector{X: 200, Y: 200},
 		Scale:    vector.Vector{X: 2, Y: 2},
 		Spacing:  vector.Vector{X: 0, Y: 0},

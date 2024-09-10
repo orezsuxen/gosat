@@ -56,6 +56,12 @@ func Add(v *Vector, o *Vector) Vector {
 		Y: v.Y + o.Y,
 	}
 }
+func AddScalar(v *Vector, s float64) Vector {
+	return Vector{
+		X: v.X + s,
+		Y: v.Y + s,
+	}
+}
 
 func (v *Vector) Add(o *Vector) {
 	v.X += o.X
@@ -73,6 +79,12 @@ func Sub(v *Vector, o *Vector) Vector {
 	return Vector{
 		X: v.X - o.X,
 		Y: v.Y - o.Y,
+	}
+}
+func SubScalar(v *Vector, s float64) Vector {
+	return Vector{
+		X: v.X - s,
+		Y: v.Y - s,
 	}
 }
 
@@ -95,6 +107,13 @@ func Mul(v *Vector, o *Vector) Vector {
 	}
 }
 
+func MulScalar(v *Vector, s float64) Vector {
+	return Vector{
+		X: v.X * s,
+		Y: v.Y * s,
+	}
+}
+
 func (v *Vector) Mul(o *Vector) {
 	v.X *= o.X
 	v.Y *= o.Y
@@ -111,6 +130,13 @@ func Div(v *Vector, o *Vector) Vector {
 	return Vector{
 		X: v.X / o.X,
 		Y: v.Y / o.Y,
+	}
+}
+
+func DivScalar(v *Vector, s float64) Vector {
+	return Vector{
+		X: v.X / s,
+		Y: v.Y / s,
 	}
 }
 
